@@ -1,7 +1,7 @@
 from machine import Pin, SoftI2C, 
 from lcd_with_i2c import LCD
 from time import sleep
-import network, wifi
+import network, wifi, ntptime, time
 
 
 lcd = LCD(SoftI2C(scl=Pin(1), sda=Pin(0), freq=100000))
@@ -18,3 +18,11 @@ while wlan.status() != 3:
     time_waiting = time_waiting + 1
     sleep(1)
 
+time_not_set = True
+while time_not_set:
+    try:
+        ntptime.settime()
+    except OSError:
+        continue
+    else:
+        time_not_set = False
