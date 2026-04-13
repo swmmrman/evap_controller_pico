@@ -1,19 +1,18 @@
-from machine import Pin, SoftI2C, 
+from machine import Pin, SoftI2C, Timer
 from lcd_with_i2c import LCD
 from time import sleep
-import network, wifi, ntptime, time, _thread
-
-def show_time():
-    while True:
-        (Y, M, D, h, m, s, u, u2) = time.localtime(time.time()-21600)
-        lcd.clear()
-        lcd.puts(f"{h:02}:{m:02}:{s:02}", x=0, y=0)
-        lcd.puts(f"{Y}-{M:02}-{D:02}", x=0, y=3)
-        sleep(1)
+import network, wifi, ntptime, time
 
 
 lcd = LCD(SoftI2C(scl=Pin(1), sda=Pin(0), freq=100000))
 lcd.puts("Hello World.")
+
+def show_time(isr):
+    global lcd
+    (Y, M, D, h, m, s, u, u2) = time.localtime(time.time()-21600)
+    lcd.clear()
+    lcd.puts(f"{h:02}:{m:02}:{s:02}", x=0, y=0)
+    lcd.puts(f"{Y}-{M:02}-{D:02}", x=0, y=3)
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -35,5 +34,5 @@ while time_not_set:
     else:
         time_not_set = False
 
-
-_thread.start_new_thread(show_time, ())
+#clock_timer = Timer()
+#clock_timer.init(freq=1, callback=show_time)
