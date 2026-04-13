@@ -26,3 +26,10 @@ while time_not_set:
         continue
     else:
         time_not_set = False
+
+while True:
+    (Y, M, D, h, m, s, u, u2) = time.localtime(time.time()-21600)
+    lcd.clear()
+    lcd.puts(f"{h:02}:{m:02}:{s:02}", x=0, y=0)
+    lcd.puts(f"{Y}-{M:02}-{D:02}", x=0, y=3)
+    sleep(1)
