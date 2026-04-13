@@ -18,13 +18,17 @@ wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 wlan.connect(wifi.ssid, wifi.password)
 
-print()
+lcd.clear()
 time_waiting = 0
 while wlan.status() != 3:
-    print(f"\rWaiting for wifi: {time_waiting} seconds", end="")
+    
+    lcd.puts("Waiting for wifi:", x=0 ,y=0)
+    lcd.puts(f"{time_waiting} seconds", x=0, y=1)
     time_waiting = time_waiting + 1
     sleep(1)
 
+lcd.clear()
+lcd.puts("Setting clock")
 time_not_set = True
 while time_not_set:
     try:
@@ -34,5 +38,5 @@ while time_not_set:
     else:
         time_not_set = False
 
-#clock_timer = Timer()
-#clock_timer.init(freq=1, callback=show_time)
+clock_timer = Timer()
+clock_timer.init(freq=1, callback=show_time)
