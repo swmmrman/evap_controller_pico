@@ -1,1 +1,5 @@
 wifi.py
+.micropico
+.gitignore
+.vscode/settings.json
+.vscode/extensions.json
