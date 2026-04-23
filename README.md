@@ -1,4 +1,10 @@
 ## Pico based Evaporative Cooling controller ##
+
+# This project is abandoned
+
+Along with all related projects.  Micropython has a memory leak in the 2nd thread.  Also working with the micropython tools was cosuming more time then coding and debugging.
+
+
 This is a small part of a larger project. It will all be based on the RaspberryPi Pico 2 W.
 All Parts will be MIT License, unless otherwise state.<br>
 lcd_with_i2c.py is under its own license and can be found here.<br>
